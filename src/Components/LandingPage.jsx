@@ -1,4 +1,4 @@
-// Landing.jsx
+// LandingPage.jsx
 import React from 'react';
 import { GraduationCap, BookOpen, Users } from 'lucide-react';
 
