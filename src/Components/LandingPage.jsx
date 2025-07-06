@@ -1,5 +1,5 @@
-// LandingPage.jsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GraduationCap, BookOpen, Users } from 'lucide-react';
 
 const Button = ({ children, onClick, variant = 'primary', className = '' }) => {
@@ -17,8 +17,10 @@ const Button = ({ children, onClick, variant = 'primary', className = '' }) => {
 };
 
 const AuthButtons = () => {
-  const handleSignIn = () => console.log('Sign In clicked');
-  const handleSignUp = () => console.log('Sign Up clicked');
+  const navigate = useNavigate();
+
+  const handleSignIn = () => navigate('/signin');
+  const handleSignUp = () => navigate('/signup');
 
   return (
     <div className="flex flex-row gap-4 w-full max-w-sm mx-auto">
