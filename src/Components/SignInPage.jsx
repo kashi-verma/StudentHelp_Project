@@ -1,8 +1,123 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // Utility function for conditional classes
 const cn = (...classes) => classes.filter(Boolean).join(' ');
+
+// Animated SVG Background Blobs
+const BackgroundBlobs = () => (
+  <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+    {/* Top Left Blob */}
+    <svg className="absolute top-[-8rem] left-[-8rem] w-[30rem] opacity-40 animate-pulse" viewBox="0 0 500 500">
+      <defs>
+        <linearGradient id="blob1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#4F46E5" />
+          <stop offset="100%" stopColor="#22D3EE" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#blob1)" d="M410,310Q390,370,320,390Q250,410,180,390Q110,370,90,310Q70,250,90,190Q110,130,180,110Q250,90,320,110Q390,130,410,190Q430,250,410,310Z"/>
+    </svg>
+    {/* Bottom Right Blob */}
+    <svg className="absolute bottom-[-10rem] right-[-10rem] w-[40rem] opacity-30 animate-pulse" viewBox="0 0 500 500">
+      <defs>
+        <linearGradient id="blob2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#22D3EE" />
+          <stop offset="100%" stopColor="#6366F1" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#blob2)" d="M440,320Q410,390,320,410Q230,430,150,390Q70,350,70,250Q70,150,150,110Q230,70,320,110Q410,150,440,250Q470,350,440,320Z"/>
+    </svg>
+  </div>
+);
+
+// Dynamic Particle Dots
+const DynamicDots = ({ dotCount = 14 }) => {
+  const [dots, setDots] = useState([]);
+  const animationRef = useRef();
+
+  useEffect(() => {
+    const initialDots = Array.from({ length: dotCount }).map(() => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      r: 8 + Math.random() * 10,
+      dx: (Math.random() - 0.5) * 0.08,
+      dy: (Math.random() - 0.5) * 0.08,
+      color: Math.random() > 0.5 ? '#4F46E5' : '#22D3EE'
+    }));
+    setDots(initialDots);
+  }, [dotCount]);
+
+  useEffect(() => {
+    function animate() {
+      setDots(prevDots =>
+        prevDots.map(dot => {
+          let { x, y, dx, dy } = dot;
+          x += dx;
+          y += dy;
+          if (x < 0 || x > 100) dx *= -1;
+          if (y < 0 || y > 100) dy *= -1;
+          return { ...dot, x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)), dx, dy };
+        })
+      );
+      animationRef.current = requestAnimationFrame(animate);
+    }
+    animationRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationRef.current);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none -z-10">
+      {dots.map((dot, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full opacity-40"
+          style={{
+            width: `${dot.r}px`,
+            height: `${dot.r}px`,
+            left: `${dot.x}%`,
+            top: `${dot.y}%`,
+            background: dot.color,
+            filter: 'blur(1px)'
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Designful Logo (SVG)
+const Logo = () => (
+  <div className="relative flex items-center justify-center w-16 h-16 mx-auto mb-4">
+    {/* Background stylized book */}
+    <svg
+      viewBox="0 0 64 64"
+      className="absolute w-full h-full"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Book base */}
+      <rect x="8" y="20" width="48" height="28" rx="6" fill="#EEF2FF" />
+      {/* Book pages */}
+      <rect x="14" y="24" width="36" height="20" rx="3" fill="#fff" />
+      {/* Book spine */}
+      <rect x="30" y="24" width="4" height="20" rx="2" fill="#6366F1" />
+      {/* Sparkle */}
+      <circle cx="52" cy="24" r="2" fill="#22D3EE" />
+      <circle cx="12" cy="30" r="1.5" fill="#4F46E5" />
+    </svg>
+    {/* Graduation Cap */}
+    <svg
+      viewBox="0 0 32 32"
+      className="absolute w-8 h-8 top-1 left-1/2 -translate-x-1/2"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon points="16,4 28,10 16,16 4,10" fill="#4F46E5" />
+      <rect x="14" y="16" width="4" height="6" fill="#6366F1" />
+      <circle cx="16" cy="22" r="1.3" fill="#22D3EE" />
+    </svg>
+  </div>
+);
 
 // Input component
 const Input = React.forwardRef(({ className, type, ...props }, ref) => {
@@ -35,12 +150,12 @@ const Label = React.forwardRef(({ className, ...props }, ref) => {
 });
 Label.displayName = "Label";
 
-// Button component (placeholder if not provided)
+// Button component
 const Button = ({ children, className, ...props }) => {
   return (
     <button
       className={cn(
-        "bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-lg px-4 py-2 transition-colors duration-200",
+        "relative bg-gradient-to-r from-[#4F46E5] to-[#22D3EE] hover:from-[#22D3EE] hover:to-[#4F46E5] text-white rounded-lg px-4 py-2 transition-all duration-200 font-semibold text-lg shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#22D3EE]/40",
         className
       )}
       {...props}
@@ -57,18 +172,22 @@ const SignInPage = () => {
 
   const handleSignIn = (e) => {
     e.preventDefault();
+    // Handle sign in logic here
     console.log('Sign in with:', { email, password });
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#EEF2FF] via-[#4F46E5]/30 to-[#22D3EE]/40 flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-[#EEF2FF] via-[#4F46E5]/30 to-[#22D3EE]/40 flex items-center justify-center px-4 relative overflow-hidden">
+      <BackgroundBlobs />
+      <DynamicDots dotCount={14} />
+      <div className="w-full max-w-md z-10">
+        <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-100">
+          <Logo />
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">Welcome Back</h1>
-            <h2 className="text-xl font-semibold text-[#4F46E5] mb-4">to StudentHelp</h2>
+            <h1 className="text-2xl font-bold text-gray-800 mb-1">Welcome Back</h1>
+            <h2 className="text-xl font-extrabold bg-gradient-to-r from-[#4F46E5] to-[#22D3EE] bg-clip-text text-transparent mb-2">StudentHelp</h2>
             <p className="text-gray-600 text-sm">
-              Sign-in to continue<br />
+              Sign in to continue<br />
               Your Buy & Sell
             </p>
           </div>
@@ -104,7 +223,7 @@ const SignInPage = () => {
               />
             </div>
 
-            <Button className="w-full py-3 text-lg font-semibold">
+            <Button className="w-full py-3">
               Sign In
             </Button>
           </form>
@@ -116,7 +235,7 @@ const SignInPage = () => {
                 to="/signup"
                 className="text-[#4F46E5] hover:text-[#22D3EE] font-semibold transition-colors"
               >
-                SignUp
+                Sign Up
               </Link>
             </p>
           </div>
@@ -127,3 +246,12 @@ const SignInPage = () => {
 };
 
 export default SignInPage;
+
+/*
+Add to your CSS or Tailwind config for the slow spin:
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+}
+*/
