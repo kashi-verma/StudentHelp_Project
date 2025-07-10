@@ -6,6 +6,7 @@ import SignInPage from "./Components/SignInPage";
 import HomePage from "./Components/HomePage";
 import SellPage from "./Components/SellPage";
 import UserDashBoard from "./Components/UserDashBoard"; // Import your new UserDashBoard
+import Shop from "./Components/Shop";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/sell" element={<SellPage />} />
-        <Route path="/dashboard" element={<UserDashBoard />} /> {/* User Dashboard route */}
+        <Route path="/dashboard" element={<UserDashBoard />} />
+        <Route path="/shop" element={<Shop/>}/>
       </Routes>
     </Router>
   );
