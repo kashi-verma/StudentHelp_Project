@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -186,11 +187,20 @@ const HomePage = () => {
     }
   ];
 
+  // Update these to real routes in your app!
   const menuItems = [
-    { name: "About", href: "#about" },
-    { name: "Shop", href: "#shop" },
-    { name: "Sell", href: "#sell" },
-    { name: "Rate Us", href: "#rate" }
+    { name: "About", to: "/about" },
+    { name: "Shop", to: "/shop" },
+    { name: "Sell", to: "/sell" },
+    { name: "Rate Us", to: "/rate" }
+  ];
+
+  const footerLinks = [
+    { name: "About Us", to: "/about" },
+    { name: "Shop", to: "/shop" },
+    { name: "Sell Items", to: "/sell" },
+    { name: "Contact", to: "/contact" },
+    { name: "Rate Us", to: "/rate" }
   ];
 
   const handleSearch = (e) => {
@@ -246,14 +256,14 @@ const HomePage = () => {
                   <div className="absolute right-0 mt-2 w-48 bg-white/90 rounded-xl shadow-xl border z-50">
                     <div className="py-2">
                       {menuItems.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
-                          href={item.href}
+                          to={item.to}
                           className="block px-4 py-2 text-base text-[#0F172A] hover:bg-[#EEF2FF] transition-colors"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -334,14 +344,18 @@ const HomePage = () => {
             <div>
               <h3 className="text-lg font-semibold text-[#0F172A] mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li><a href="#about" className="text-base text-[#4F46E5] hover:text-[#22D3EE] transition-colors">About Us</a></li>
-                <li><a href="#shop" className="text-base text-[#4F46E5] hover:text-[#22D3EE] transition-colors">Shop</a></li>
-                <li><a href="#sell" className="text-base text-[#4F46E5] hover:text-[#22D3EE] transition-colors">Sell Items</a></li>
-                <li><a href="#contact" className="text-base text-[#4F46E5] hover:text-[#22D3EE] transition-colors">Contact</a></li>
-                <li><a href="#rate" className="text-base text-[#4F46E5] hover:text-[#22D3EE] transition-colors">Rate Us</a></li>
+                {footerLinks.map(link => (
+                  <li key={link.name}>
+                    <Link
+                      to={link.to}
+                      className="text-base text-[#4F46E5] hover:text-[#22D3EE] transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
-
             {/* Address */}
             <div>
               <h3 className="text-lg font-semibold text-[#0F172A] mb-4">Address</h3>
@@ -377,3 +391,4 @@ Add to your CSS or Tailwind config for the slow spin:
   }
 }
 */
+
