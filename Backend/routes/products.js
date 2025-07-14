@@ -1,6 +1,8 @@
-const express = require('express');
-const Product = require('../models/Product');
-const auth = require('../middleware/auth');
+// routes/products.js
+import express from 'express';
+import Product from '../models/Product.js';
+import auth from '../middleware/auth.js';
+
 const router = express.Router();
 
 // Create Product
@@ -24,7 +26,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get Products by User
+// Get User's Products (Sell History)
 router.get('/my', auth, async (req, res) => {
   try {
     const products = await Product.find({ seller: req.user.id });
@@ -34,43 +36,4 @@ router.get('/my', auth, async (req, res) => {
   }
 });
 
-// Get Single Product
-router.get('/:id', async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id).populate('seller', 'name email');
-    if (!product) return res.status(404).json({ msg: 'Product not found' });
-    res.json(product);
-  } catch (err) {
-    res.status(500).send('Server error');
-  }
-});
-
-// Update Product
-router.put('/:id', auth, async (req, res) => {
-  try {
-    let product = await Product.findById(req.params.id);
-    if (!product) return res.status(404).json({ msg: 'Product not found' });
-    if (product.seller.toString() !== req.user.id) return res.status(401).json({ msg: 'Not authorized' });
-
-    product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(product);
-  } catch (err) {
-    res.status(500).send('Server error');
-  }
-});
-
-// Delete Product
-router.delete('/:id', auth, async (req, res) => {
-  try {
-    let product = await Product.findById(req.params.id);
-    if (!product) return res.status(404).json({ msg: 'Product not found' });
-    if (product.seller.toString() !== req.user.id) return res.status(401).json({ msg: 'Not authorized' });
-
-    await Product.findByIdAndRemove(req.params.id);
-    res.json({ msg: 'Product removed' });
-  } catch (err) {
-    res.status(500).send('Server error');
-  }
-});
-
-module.exports = router;
+export default router;
