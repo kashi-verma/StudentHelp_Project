@@ -7,6 +7,7 @@ import HomePage from "./Components/HomePage";
 import SellPage from "./Components/SellPage";
 import UserDashBoard from "./Components/UserDashBoard"; // Import your new UserDashBoard
 import Shop from "./Components/Shop";
+import AdminDashboard from "./Components/AdminDashboard";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path="/sell" element={<SellPage />} />
         <Route path="/dashboard" element={<UserDashBoard />} />
         <Route path="/shop" element={<Shop/>}/>
+        <Route path="/admin" element={<AdminDashboard />} />
+
       </Routes>
     </Router>
   );
