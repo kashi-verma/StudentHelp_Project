@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Menu, Search } from "lucide-react";
 
+//admin dashboard
 // --- Animated SVG Background Blobs ---
 const BackgroundBlobs = () => (
   <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
