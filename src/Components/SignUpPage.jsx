@@ -299,3 +299,4 @@ Add to your CSS or Tailwind config for the slow spin:
   }
 }
 */
+//Sign Up page
