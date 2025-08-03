@@ -5,7 +5,7 @@ import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Admin-only: Get all users and products updated
+// Admin-only: Get all users and products updated soon
 router.get('/activity', auth, async (req, res) => {
   try {
     const adminUser = await User.findById(req.user.id);
