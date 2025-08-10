@@ -23,8 +23,6 @@ const BackgroundBlobs = () => (
     </svg>
   </div>
 );
-
-// --- Dynamic Animated Dots ---
 const DynamicDots = ({ dotCount = 14 }) => {
   const [dots, setDots] = useState([]);
   const animationRef = useRef();
@@ -79,7 +77,7 @@ const DynamicDots = ({ dotCount = 14 }) => {
   );
 };
 
-// --- Custom SVG Logo ---
+// --- Custom SVG Logo --- created
 const Logo = () => (
   <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
     <svg viewBox="0 0 64 64" className="absolute w-full h-full" fill="none">
