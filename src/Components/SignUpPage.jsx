@@ -291,12 +291,3 @@ const SignUpPage = () => {
 
 export default SignUpPage;
 
-/*
-Add to your CSS or Tailwind config for the slow spin:
-@layer utilities {
-  .animate-spin-slow {
-    animation: spin 8s linear infinite;
-  }
-}
-*/
-//Sign Up page update
