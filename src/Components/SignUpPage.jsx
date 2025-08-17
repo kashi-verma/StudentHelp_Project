@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // Utility for conditional classes
 const cn = (...classes) => classes.filter(Boolean).join(' ');
 
-// Animated SVG Background Blobs
+
 const BackgroundBlobs = () => (
   <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
     {/* Top Left Blob */}
