@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-// Utility for conditional classes
+
 const cn = (...classes) => classes.filter(Boolean).join(' ');
 
 
@@ -17,7 +17,7 @@ const BackgroundBlobs = () => (
       </defs>
       <path fill="url(#blob1)" d="M410,310Q390,370,320,390Q250,410,180,390Q110,370,90,310Q70,250,90,190Q110,130,180,110Q250,90,320,110Q390,130,410,190Q430,250,410,310Z"/>
     </svg>
-    {/* Bottom Right Blob */}
+   
     <svg className="absolute bottom-[-10rem] right-[-10rem] w-[40rem] opacity-30 animate-pulse" viewBox="0 0 500 500">
       <defs>
         <linearGradient id="blob2" x1="0" y1="0" x2="1" y2="1">
