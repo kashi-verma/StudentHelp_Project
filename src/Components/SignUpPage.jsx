@@ -30,7 +30,6 @@ const BackgroundBlobs = () => (
   </div>
 );
 
-// Dynamic Particle Dots
 const DynamicDots = ({ dotCount = 14 }) => {
   const [dots, setDots] = useState([]);
   const animationRef = useRef();
