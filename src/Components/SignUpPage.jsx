@@ -84,7 +84,6 @@ const DynamicDots = ({ dotCount = 14 }) => {
   );
 };
 
-// Designful Logo (SVG)
 const Logo = () => (
   <div className="relative flex items-center justify-center w-16 h-16 mx-auto mb-4">
     {/* Background stylized book */}
