@@ -86,7 +86,7 @@ const DynamicDots = ({ dotCount = 14 }) => {
 
 const Logo = () => (
   <div className="relative flex items-center justify-center w-16 h-16 mx-auto mb-4">
-    {/* Background stylized book */}
+   
     <svg
       viewBox="0 0 64 64"
       className="absolute w-full h-full"
