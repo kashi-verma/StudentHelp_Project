@@ -129,7 +129,6 @@ const Header = () => (
   </header>
 );
 
-// More designful Logo
 const Logo = () => (
   <div className="relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16">
     {/* Background stylized book */}
