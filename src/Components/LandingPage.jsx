@@ -131,14 +131,13 @@ const Header = () => (
 
 const Logo = () => (
   <div className="relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16">
-    {/* Background stylized book */}
     <svg
       viewBox="0 0 64 64"
       className="absolute w-full h-full"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Book base */}
+  
       <rect x="8" y="20" width="48" height="28" rx="6" fill="#EEF2FF" />
       {/* Book pages */}
       <rect x="14" y="24" width="36" height="20" rx="3" fill="#fff" />
