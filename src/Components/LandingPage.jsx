@@ -139,7 +139,7 @@ const Logo = () => (
     >
   
       <rect x="8" y="20" width="48" height="28" rx="6" fill="#EEF2FF" />
-      {/* Book pages */}
+     
       <rect x="14" y="24" width="36" height="20" rx="3" fill="#fff" />
       {/* Book spine */}
       <rect x="30" y="24" width="4" height="20" rx="2" fill="#6366F1" />
